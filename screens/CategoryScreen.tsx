@@ -7,8 +7,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { NavigationProp, ParamListBase } from '@react-navigation/native'
 
 const CategoryScreen: React.FC<{ navigation: NavigationProp<ParamListBase> }> = (prop) => {
-    let pressHandler = () => {
-        prop.navigation.navigate('MealOverview', { categoryId: '1' })
+    let pressHandler = (item: Category) => {
+        prop.navigation.navigate('MealOverview', { categoryId: item.id })
     }
 
     let renderScreen: ListRenderItem<Category> = ({ item }) => {
