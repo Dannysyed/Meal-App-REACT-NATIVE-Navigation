@@ -8,18 +8,16 @@ import { NavigationProp, ParamListBase } from '@react-navigation/native'
 
 const CategoryScreen: React.FC<{ navigation: NavigationProp<ParamListBase> }> = (prop) => {
     let pressHandler = () => {
-        prop.navigation.navigate('MealOverview')
+        prop.navigation.navigate('MealOverview', { categoryId: '1' })
     }
 
     let renderScreen: ListRenderItem<Category> = ({ item }) => {
-        return <CategoryGridTitle title={item.title} color={item.color} onPress={pressHandler} />
+        return <CategoryGridTitle title={item.title} color={item.color} onPress={pressHandler.bind(null, item)} />
     }
     return (
 
         <View>
             <FlatList data={CATEGORIES} renderItem={renderScreen} keyExtractor={(item) => item.id} numColumns={2} />
-
-
         </View >
     )
 }
