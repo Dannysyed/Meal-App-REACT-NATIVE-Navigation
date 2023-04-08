@@ -23,8 +23,12 @@ const MealOverViewScreen: React.FC<{ navigation: NavigationProp<ParamListBase>, 
 
 
     let renderMealItem: ListRenderItem<Meal> = (itemdata) => {
+        const item = itemdata.item
+        const mealItemProp = {
+            title: item.title, imageUrl: item.imageUrl, Duration: item.duration, Affordiablity: item.affordability, Complexity: item.complexity
+        }
 
-        return <MealItem title={itemdata.item.title} />
+        return <MealItem {...mealItemProp} />
 
     }
     return (
