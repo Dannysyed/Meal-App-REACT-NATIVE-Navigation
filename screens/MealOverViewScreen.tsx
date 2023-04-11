@@ -1,31 +1,39 @@
 import { StyleSheet, Text, View, ListRenderItem } from 'react-native'
-import React from 'react'
-import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/native'
-import { MEALS } from '../data/dummy-data'
+import React, { useEffect } from 'react'
+import { NavigationProp, ParamListBase, RouteProp, } from '@react-navigation/native'
+import { CATEGORIES, MEALS } from '../data/dummy-data'
 import { FlatList } from 'react-native-gesture-handler'
 import Meal from '../models/meal'
 import MealItem from '../components/MealItem'
 
 interface Props {
+    navigation?: NavigationProp<ParamListBase>
     route?: {
         params?: {
             categoryId?: string | undefined
         }
     }
 }
-const MealOverViewScreen: React.FC<{ navigation: NavigationProp<ParamListBase>, route: RouteProp<ParamListBase> }> = ({ route }: Props) => {
-    let CatId: string | undefined = route?.params?.categoryId
-    console.log(CatId)
+const MealOverViewScreen: React.FC<{ navigation: NavigationProp<ParamListBase>, route: RouteProp<ParamListBase> }> = ({ route, navigation }: Props) => {
+
+    let CatId = route?.params?.categoryId
+
+
+
     const DisplayedMeals =
         MEALS.filter(val => val.categoryIds.indexOf(CatId!) >= 0)
 
-    console.log(DisplayedMeals, '???/')
+    // console.log(DisplayedMeals, '???/')
 
-
+    useEffect(() => {
+        let titleoption = CATEGORIES.find(val => val.id === CatId)?.title
+        console.log(titleoption)
+        navigation?.setOptions({ title: titleoption })
+    }, [CatId, navigation])
     let renderMealItem: ListRenderItem<Meal> = (itemdata) => {
         const item = itemdata.item
         const mealItemProp = {
-            title: item.title, imageUrl: item.imageUrl, Duration: item.duration, Affordiablity: item.affordability, Complexity: item.complexity
+            title: item.title, imageUrl: item.imageUrl, Duration: item.duration, Affordiablity: item.affordability, Complexity: item.complexity, id: item.id
         }
 
         return <MealItem {...mealItemProp} />
@@ -45,4 +53,5 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10
     },
+
 })

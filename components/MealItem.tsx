@@ -1,10 +1,25 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
 import React, { FC } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-const MealItem: FC<{ title: string, imageUrl: string, Duration: number, Complexity: string, Affordiablity: string }> = (prop) => {
+
+// type RootStackParamList = {
+//     YourScreen: { id: number };
+// };
+// let Mealid: string
+type RootStackParamList = {
+    MealDetail: { id: string };
+}
+const MealItem: FC<{ title: string, imageUrl: string, Duration: number, Complexity: string, Affordiablity: string, id: string }> = (prop) => {
+    let nav = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+
+    let detailHandle = () => {
+        nav.navigate('MealDetail', { id: prop.id })
+    }
     return (
         <View style={styles.container}>
-            <Pressable android_ripple={{ color: '#ccc' }}>
+            <Pressable android_ripple={{ color: '#ccc' }} onPress={detailHandle}>
                 <View>
                     <Image source={{ uri: prop.imageUrl }} style={styles.Image} />
                     <Text style={styles.title}>{prop.title}</Text>
