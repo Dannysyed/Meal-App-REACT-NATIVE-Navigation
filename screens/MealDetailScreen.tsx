@@ -1,20 +1,28 @@
-import { Image, StyleSheet, Text, View, ScrollView } from 'react-native'
+import { Image, StyleSheet, Text, View, ScrollView, Button } from 'react-native'
 import React, { FC, useState } from 'react'
 import { MEALS } from '../data/dummy-data'
-import { ParamListBase, RouteProp } from '@react-navigation/native'
+import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/native'
 import MealDetails from '../components/MealDetails'
 import Sublist from '../components/MealDetails/Sublist'
 import List from '../components/MealDetails/List'
+import IconDetail from '../components/IconDetail'
 
 interface Props {
-    // navigation?: NavigationProp<ParamListBase>
+    navigation?: NavigationProp<ParamListBase>
     route?: {
         params?: {
             id?: string | undefined
         }
     }
 }
-const MealDetail: FC<{ route: RouteProp<ParamListBase> }> = ({ route }: Props) => {
+const MealDetail: FC<{ route: RouteProp<ParamListBase> }> = ({ route, navigation }: Props) => {
+
+    navigation?.setOptions({
+        headerRight: () => {
+            return <IconDetail icon={'star'} color={'white'} onPress={() => alert(' Added to favorite')} />
+        }
+    })
+
     let [mealdetail] = MEALS.filter(val => val.id == route?.params?.id)
     console.log(mealdetail)
     return (

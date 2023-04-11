@@ -15,11 +15,7 @@ export default function App() {
         <Stack.Navigator initialRouteName='MealCategory' screenOptions={{ headerStyle: { backgroundColor: '#ccc2' }, headerTintColor: 'white', contentStyle: { backgroundColor: '#ccc0' } }}>
           <Stack.Screen name='MealCategory' component={CategoryScreen} options={{ title: 'Welcome to Dominos', headerStyle: { backgroundColor: '#ccc6' }, headerTintColor: 'white', contentStyle: { backgroundColor: '#ccc0' } }} />
           <Stack.Screen name="MealOverview" component={MealOverViewScreen} />
-          <Stack.Screen name="MealDetail" component={MealDetail} options={{
-            headerRight: () => {
-              return <Button title='Tap me' onPress={() => alert(' YOu are fool')} />
-            }
-          }} />
+          <Stack.Screen name="MealDetail" component={MealDetail} />
         </Stack.Navigator>
       </NavigationContainer>
       {/* <CategoryScreen /> */}
