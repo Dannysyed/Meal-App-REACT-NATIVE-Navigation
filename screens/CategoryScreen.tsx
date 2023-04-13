@@ -12,7 +12,7 @@ const CategoryScreen: React.FC<{ navigation: NavigationProp<ParamListBase> }> = 
     }
 
     let renderScreen: ListRenderItem<Category> = ({ item }) => {
-        return <CategoryGridTitle title={item.title} color={item.color} onPress={pressHandler.bind(null, item)} />
+        return <CategoryGridTitle title={item.title} image={item.image} color={item.color} onPress={pressHandler.bind(null, item)} />
     }
     return (
 
