@@ -23,7 +23,7 @@ export default function App() {
     }
 
     }>
-      <Drawer.Screen name='MealCategory' component={CategoryScreen} options={{
+      <Drawer.Screen name='Welcome to Valdanation' component={CategoryScreen} options={{
         drawerLabel: 'Meal Category',
         drawerActiveBackgroundColor: '#e05e0c4e',
         drawerActiveTintColor: 'white', drawerIcon: ({ color, size }) => (<Ionicons name='home' color={color} size={size} />)
