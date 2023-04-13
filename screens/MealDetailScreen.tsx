@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View, ScrollView, Button } from 'react-native'
-import React, { FC, useContext, useState } from 'react'
+import React, { FC, useContext, useEffect, useState } from 'react'
 import { MEALS } from '../data/dummy-data'
 import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/native'
 import MealDetails from '../components/MealDetails'
@@ -17,22 +17,46 @@ interface Props {
     }
 }
 const MealDetail: FC<{ route: RouteProp<ParamListBase> }> = ({ route, navigation }: Props) => {
+
+    let [isFav, setIsFav] = useState<boolean>(false)
+
     let data = useContext(FavouritItem)
 
 
+
     let addtoFav = () => {
-        // data.addFavorite(route?.params?.id)
-        console.warn(route?.params?.id)
+
+        if (!isFav) {
+            data.addFavorite(route?.params?.id!)
+            setIsFav(false)
+        }
+        else {
+            data.removeFavorite(route?.params?.id!)
+            setIsFav(true)
+        }
+
+
     }
+    console.warn(data.ids)
+
+    useEffect(() => {
+        if (data.ids.includes(route?.params?.id!)) {
+            setIsFav(true)
+        }
+        else {
+            setIsFav(false)
+        }
+
+    }, [isFav, addtoFav])
 
     navigation?.setOptions({
         headerRight: () => {
-            return <IconDetail icon={'star'} color={'white'} onPress={addtoFav} />
+            return <IconDetail icon={isFav ? 'star' : 'star-outline'} color={'white'} onPress={addtoFav} />
         }
     })
 
     let [mealdetail] = MEALS.filter(val => val.id == route?.params?.id)
-    console.log(mealdetail)
+    //(mealdetail)
     return (
         <ScrollView style={styles.container}>
 

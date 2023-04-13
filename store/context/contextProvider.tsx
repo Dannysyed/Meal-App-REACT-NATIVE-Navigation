@@ -12,7 +12,7 @@ const FavContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
         setFavoriteMeal(prev =>
             prev.filter(mealid => mealid != id))
     }
-    console.log(favoriteMeal, 'vildddddddddddddddd')
+    //(favoriteMeal, 'vildddddddddddddddd')
     let valued: Favdata = {
         ids: favoriteMeal,
         addFavorite: addtoFavorite,

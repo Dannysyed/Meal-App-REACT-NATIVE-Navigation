@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { FC } from 'react'
 
 const List: FC<{ dataPoint: string[] }> = ({ dataPoint }) => {
-    console.log(dataPoint, ';;;;;;;;;;;')
+    // //(dataPoint, ';;;;;;;;;;;')
 
     return (
         <>{dataPoint.map(val => <View style={styles.listItem}>

@@ -23,11 +23,11 @@ const MealOverViewScreen: React.FC<{ navigation: NavigationProp<ParamListBase>, 
     const DisplayedMeals =
         MEALS.filter(val => val.categoryIds.indexOf(CatId!) >= 0)
 
-    // console.log(DisplayedMeals, '???/')
+    // //(DisplayedMeals, '???/')
 
     useEffect(() => {
         let titleoption = CATEGORIES.find(val => val.id === CatId)?.title
-        console.log(titleoption)
+        //(titleoption)
         navigation?.setOptions({ title: titleoption })
     }, [CatId, navigation])
     let renderMealItem: ListRenderItem<Meal> = (itemdata) => {
