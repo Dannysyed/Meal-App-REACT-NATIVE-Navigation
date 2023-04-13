@@ -1,11 +1,12 @@
 import { Image, StyleSheet, Text, View, ScrollView, Button } from 'react-native'
-import React, { FC, useState } from 'react'
+import React, { FC, useContext, useState } from 'react'
 import { MEALS } from '../data/dummy-data'
 import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/native'
 import MealDetails from '../components/MealDetails'
 import Sublist from '../components/MealDetails/Sublist'
 import List from '../components/MealDetails/List'
 import IconDetail from '../components/IconDetail'
+import FavouritItem from '../store/context/context-favorit'
 
 interface Props {
     navigation?: NavigationProp<ParamListBase>
@@ -16,10 +17,17 @@ interface Props {
     }
 }
 const MealDetail: FC<{ route: RouteProp<ParamListBase> }> = ({ route, navigation }: Props) => {
+    let data = useContext(FavouritItem)
+
+
+    let addtoFav = () => {
+        // data.addFavorite(route?.params?.id)
+        console.warn(route?.params?.id)
+    }
 
     navigation?.setOptions({
         headerRight: () => {
-            return <IconDetail icon={'star'} color={'white'} onPress={() => alert(' Added to favorite')} />
+            return <IconDetail icon={'star'} color={'white'} onPress={addtoFav} />
         }
     })
 

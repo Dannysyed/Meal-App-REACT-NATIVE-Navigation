@@ -9,10 +9,11 @@ import MealDetail from './screens/MealDetailScreen';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import FavoriteScreen from './screens/FavoriteScreen';
 import { Ionicons } from '@expo/vector-icons'
+import FavContextProvider from './store/context/contextProvider';
 export default function App() {
   let Stack = createNativeStackNavigator()
   let Drawer = createDrawerNavigator()
-  let drawerNavigator = () => {
+  let DrawerNavigator = () => {
     return <Drawer.Navigator screenOptions={{
       headerStyle: { backgroundColor: '#562305' },
       headerTintColor: 'white',
@@ -39,14 +40,17 @@ export default function App() {
   return (
     <>
       <StatusBar style='dark' />
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName='MealCategory' screenOptions={{ headerStyle: { backgroundColor: '#ccc2' }, headerTintColor: 'white', contentStyle: { backgroundColor: '#ccc0' } }}>
-          <Stack.Screen name='MealCategory' component={drawerNavigator} options={{ title: 'Welcome to Dominos', headerStyle: { backgroundColor: '#ccc6' }, headerTintColor: 'white', contentStyle: { backgroundColor: '#ccc0', }, headerShown: false }} />
-          <Stack.Screen name="MealOverview" component={MealOverViewScreen} />
-          <Stack.Screen name="MealDetail" component={MealDetail} />
+      <FavContextProvider>
 
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='MealCategorys' screenOptions={{ headerStyle: { backgroundColor: '#ccc2' }, headerTintColor: 'white', contentStyle: { backgroundColor: '#ccc0' } }}>
+            <Stack.Screen name='MealCategorys' component={DrawerNavigator} options={{ title: 'Welcome to Dominos', headerStyle: { backgroundColor: '#ccc6' }, headerTintColor: 'white', contentStyle: { backgroundColor: '#ccc0', }, headerShown: false }} />
+            <Stack.Screen name="MealOverview" component={MealOverViewScreen} />
+            <Stack.Screen name="MealDetail" component={MealDetail} />
+
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavContextProvider>
       {/* <CategoryScreen /> */}
     </>
   );
